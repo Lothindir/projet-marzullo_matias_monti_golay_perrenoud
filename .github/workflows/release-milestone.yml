@@ -26,6 +26,10 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
         
+      - name: Get Project Version from pom.xml
+        uses: entimaniac/read-pom-version-action@1.0.0
+        id: getVersion
+
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -34,6 +38,6 @@ jobs:
           title: "Development Build"
           files: |
             LICENSE
-            target/hyde.jar
+            target/hyde-${{ steps.getVersion.outputs.version }}.jar
             target/hyde
             target/hyde.exe
