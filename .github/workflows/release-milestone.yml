@@ -9,13 +9,14 @@ on:
       - "v*"
 
 jobs:
+  build:
+    uses: ./.github/workflows/maven.yml
+    
   pre-release:
     name: "Pre Release"
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: ./.github/workflows/maven.yml
-
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
