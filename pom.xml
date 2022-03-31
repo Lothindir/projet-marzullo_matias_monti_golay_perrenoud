@@ -5,11 +5,11 @@
    <name>hyde</name>
    <artifactId>hyde</artifactId>
    <groupId>org.hyde</groupId>
-   <version>0.1.0</version>
+   <version>0.0.1-SNAPSHOT</version>
 
    <description>Jekyll's evil twin static site generator</description>
 
-   <url>https://github.com/${project.scm.url}</url>
+   <url>${project.scm.url}</url>
 
    <licenses>
       <license>
@@ -25,26 +25,28 @@
    </organization>
 
    <scm>
-      <url>scm:git:https://github.com/${project.scm.url}</url>
-      <connection>scm:git:git@github.com:${project.scm.url}.git</connection>
-      <developerConnection>scm:git:git@github.com:${project.scm.url}.git</developerConnection>
-     <tag>v0.1.0</tag>
+      <url>scm:git:${project.scm.url}</url>
+      <connection>scm:git:git@github.com:${project.scm}.git</connection>
+      <developerConnection>scm:git:git@github.com:${project.scm}.git</developerConnection>
+     <tag>HEAD</tag>
   </scm>
 
    <issueManagement>
       <system>Issues</system>
-      <url>https://github.com/${project.scm.url}/issues</url>
+      <url>${project.scm.url}/issues</url>
    </issueManagement>
 
    <ciManagement>
       <system>Pipelines</system>
-      <url>https://github.com/${project.scm.url}/pipelines</url>
+      <url>${project.scm.url}/pipelines</url>
    </ciManagement>
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.scm.url>Lothindir/projet-marzullo_matias_monti_golay_perrenoud</project.scm.url>
       <main.class>org.hyde.Hyde</main.class>
+      <project.scm>Lothindir/projet-marzullo_matias_monti_golay_perrenoud</project.scm>
+      <project.scm.url>https://github.com/${project.scm}</project.scm.url>
+      <project.main.class>org.hyde.Hyde</project.main.class>
       <exec.mainClass>org.hyde.Hyde</exec.mainClass>
       <java.version>11</java.version>
       <junit.jupiter.version>5.4.2</junit.jupiter.version>
@@ -65,8 +67,16 @@
          <artifactId>picocli</artifactId>
          <version>4.6.3</version>
       </dependency>
-
-      <!-- MD to HTML Lib -->
+      <dependency>
+         <groupId>io.javalin</groupId>
+         <artifactId>javalin</artifactId>
+         <version>4.5.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-simple</artifactId>
+         <version>1.7.31</version>
+      </dependency>
       <dependency>
          <groupId>org.commonmark</groupId>
          <artifactId>commonmark</artifactId>
@@ -102,7 +112,11 @@
                      <createDependencyReducedPom>false</createDependencyReducedPom>
                      <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                           <mainClass>${main.class}</mainClass>
+                           <manifestEntries>
+                              <Main-Class>${project.main.class}</Main-Class>
+                              <Implementation-Title>${project.artifactId}</Implementation-Title>
+                              <Implementation-Version>${project.version}</Implementation-Version>
+                           </manifestEntries>
                         </transformer>
                      </transformers>
                   </configuration>
@@ -121,7 +135,7 @@
             <version>1.4.1</version>
             <configuration>
                <flags>-Xmx1G</flags>
-               <programFile>${name}</programFile>
+               <programFile>${project.name}</programFile>
 
             </configuration>
             <executions>
@@ -140,18 +154,18 @@
             <version>2.1.2</version>
             <executions>
                <execution>
-                  <id>${name}</id>
+                  <id>${project.name}</id>
                   <phase>package</phase>
                   <goals>
                      <goal>launch4j</goal>
                   </goals>
                   <configuration>
                      <headerType>console</headerType>
-                     <outfile>target/${name}.exe</outfile>
-                     <jar>target/${name}-${version}.jar</jar>
-                     <errTitle>${name}</errTitle>
+                     <outfile>target/${project.name}.exe</outfile>
+                     <jar>target/${project.name}-${project.version}.jar</jar>
+                     <errTitle>${project.name}</errTitle>
                      <classPath>
-                        <mainClass>${main.class}</mainClass>
+                        <mainClass>${project.main.class}</mainClass>
                         <addDependencies>false</addDependencies>
                         <preCp>anything</preCp>
                      </classPath>
@@ -161,14 +175,14 @@
                      </jre>
                      <versionInfo>
                         <fileVersion>1.0.0.0</fileVersion>
-                        <txtFileVersion>${version}</txtFileVersion>
-                        <fileDescription>${description}</fileDescription>
+                        <txtFileVersion>${project.version}</txtFileVersion>
+                        <fileDescription>${project.description}</fileDescription>
                         <copyright>MIT</copyright>
                         <productVersion>1.0.0.0</productVersion>
-                        <txtProductVersion>${version}</txtProductVersion>
-                        <productName>${name}</productName>
-                        <internalName>${name}</internalName>
-                        <originalFilename>${name}.exe</originalFilename>
+                        <txtProductVersion>${project.version}</txtProductVersion>
+                        <productName>${project.name}</productName>
+                        <internalName>${project.name}</internalName>
+                        <originalFilename>${project.name}.exe</originalFilename>
                      </versionInfo>
                   </configuration>
                </execution>
