@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    name: "Build"
     uses: ./.github/workflows/maven.yml
     
   pre-release:
