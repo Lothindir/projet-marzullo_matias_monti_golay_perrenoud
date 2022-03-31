@@ -146,7 +146,7 @@
                   <configuration>
                      <headerType>console</headerType>
                      <outfile>target/${name}.exe</outfile>
-                     <jar>target/${name}-${version}.jar</jar>
+                     <jar>target/${name}.jar</jar>
                      <errTitle>${name}</errTitle>
                      <classPath>
                         <mainClass>${main.class}</mainClass>
