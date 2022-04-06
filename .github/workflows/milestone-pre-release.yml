@@ -16,24 +16,6 @@ jobs:
         uses: qcastel/github-actions-maven-release@v1.12.31
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          gpg-enabled: "true"
-          gpg-key-id: ${{ secrets.GITHUB_GPG_KEY_ID }}
-          gpg-key: ${{ secrets.GITHUB_GPG_KEY }}
           version-minor: true
         env:
           JAVA_HOME: /usr/lib/jvm/java-14-openjdk/
-
-      - name: Get Project Version from pom.xml
-        uses: entimaniac/read-pom-version-action@1.0.0
-        id: getVersion
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: |
-            LICENSE
-            target/hyde-${{ steps.getVersion.outputs.version }}.jar
-            target/hyde
-            target/hyde.exe
