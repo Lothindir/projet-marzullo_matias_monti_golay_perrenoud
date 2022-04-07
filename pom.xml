@@ -5,7 +5,7 @@
    <name>hyde</name>
    <artifactId>hyde</artifactId>
    <groupId>org.hyde</groupId>
-   <version>0.0.1-SNAPSHOT</version>
+   <version>0.1.0-SNAPSHOT</version>
 
    <description>Jekyll's evil twin static site generator</description>
 
@@ -179,6 +179,7 @@
             <version>3.0.0-M5</version>
             <configuration>
                <tagNameFormat>v@{project.version}</tagNameFormat>
+               <scmCommentPrefix>[ci skip]</scmCommentPrefix>
                <preparationGoals>clean verify</preparationGoals>
             </configuration>
          </plugin>

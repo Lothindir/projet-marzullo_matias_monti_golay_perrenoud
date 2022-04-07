@@ -7,7 +7,7 @@ on:
 
 jobs:    
   pre-release:
-    name: "Pre Release"
+    name: "Pre Release on Milestone"
     runs-on: "ubuntu-latest"
 
     steps:
