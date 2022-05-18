@@ -16,6 +16,8 @@ jobs:
         uses: entimaniac/read-pom-version-action@1.0.0
         id: getVersion
       - uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: '${{ steps.getVersion.outputs.version }}'
       - name: Set up JDK 11
