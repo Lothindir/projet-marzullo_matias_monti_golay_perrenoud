@@ -5,11 +5,11 @@
    <name>hyde</name>
    <artifactId>hyde</artifactId>
    <groupId>org.hyde</groupId>
-   <version>0.1.0-SNAPSHOT</version>
+   <version>0.1.0</version>
 
    <description>Jekyll's evil twin static site generator</description>
 
-   <url>https://github.com/dil-classroom/projet-marzullo_matias_monti_golay_perrenoud</url>
+   <url>https://github.com/${project.scm.url}</url>
 
    <licenses>
       <license>
@@ -25,24 +25,25 @@
    </organization>
 
    <scm>
-      <url>scm:git:https://github.com/dil-classroom/projet-marzullo_matias_monti_golay_perrenoud</url>
-      <connection>scm:git:git@github.com:dil-classroom/projet-marzullo_matias_monti_golay_perrenoud.git</connection>
-      <developerConnection>scm:git:git@github.com:dil-classroom/projet-marzullo_matias_monti_golay_perrenoud.git</developerConnection>
+      <url>scm:git:https://github.com/${project.scm.url}</url>
+      <connection>scm:git:git@github.com:${project.scm.url}.git</connection>
+      <developerConnection>scm:git:git@github.com:${project.scm.url}.git</developerConnection>
      <tag>v0.1.0</tag>
   </scm>
 
    <issueManagement>
       <system>Issues</system>
-      <url>https://github.com/dil-classroom/projet-marzullo_matias_monti_golay_perrenoud/issues</url>
+      <url>https://github.com/${project.scm.url}/issues</url>
    </issueManagement>
 
    <ciManagement>
       <system>Pipelines</system>
-      <url>https://github.com/dil-classroom/projet-marzullo_matias_monti_golay_perrenoud/pipelines</url>
+      <url>https://github.com/${project.scm.url}/pipelines</url>
    </ciManagement>
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.scm.url>Lothindir/projet-marzullo_matias_monti_golay_perrenoud</project.scm.url>
       <main.class>org.hyde.Hyde</main.class>
       <exec.mainClass>org.hyde.Hyde</exec.mainClass>
       <java.version>11</java.version>
@@ -123,7 +124,6 @@
                <programFile>${name}</programFile>
 
             </configuration>
-
             <executions>
                <execution>
                   <phase>package</phase>
@@ -181,10 +181,8 @@
             <version>3.0.0-M5</version>
             <configuration>
                <tagNameFormat>v@{project.version}</tagNameFormat>
-               <scmCommentPrefix>[ci skip]</scmCommentPrefix>
+               <scmCommentPrefix>[CI skip]</scmCommentPrefix>
                <preparationGoals>clean verify</preparationGoals>
-               <!--<pushChanges>false</pushChanges>
-               <dryRun>true</dryRun>-->
             </configuration>
          </plugin>
       </plugins>
