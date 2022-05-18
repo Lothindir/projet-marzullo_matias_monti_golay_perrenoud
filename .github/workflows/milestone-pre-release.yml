@@ -28,7 +28,7 @@ jobs:
           gpg-enabled: "true"
           gpg-key-id: ${{ secrets.GITHUB_GPG_KEY_ID }}
           gpg-key: ${{ secrets.GITHUB_GPG_KEY }}
-          git-release-bot-name: "release_bot_github"
+          git-release-bot-name: "release-bot-github "
           git-release-bot-email: "release.bot.github@gmail.com"
           release-branch-name: "main"
           version-minor: true
