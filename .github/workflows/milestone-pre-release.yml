@@ -30,7 +30,7 @@ jobs:
           gpg-key: ${{ secrets.GITHUB_GPG_KEY }}
           git-release-bot-name: "release_bot_github"
           git-release-bot-email: "release.bot.github@gmail.com"
-          release-branch-name: "release"
+          #release-branch-name: "release"
           version-minor: true
           maven-args: "clean install -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
           
