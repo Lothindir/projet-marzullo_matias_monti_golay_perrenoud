@@ -182,6 +182,8 @@
                <tagNameFormat>v@{project.version}</tagNameFormat>
                <scmCommentPrefix>[ci skip]</scmCommentPrefix>
                <preparationGoals>clean verify</preparationGoals>
+               <pushChanges>false</pushChanges>
+               <dryRun>true</dryRun>
             </configuration>
          </plugin>
       </plugins>
