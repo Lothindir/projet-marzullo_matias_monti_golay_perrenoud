@@ -9,6 +9,7 @@ jobs:
   pre-release:
     name: "Pre Release on Milestone"
     runs-on: "ubuntu-latest"
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
       - uses: actions/checkout@v2
@@ -31,6 +32,8 @@ jobs:
           git-release-bot-email: "release.bot.github@gmail.com"
           release-branch-name: "release"
           version-minor: true
+          maven-args: "clean install -Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
+          
         env:
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk/
           
