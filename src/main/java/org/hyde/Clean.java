@@ -38,4 +38,4 @@ class Clean implements Callable<Integer> {
       }
       return (path.delete());
    }
-}  
+}

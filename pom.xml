@@ -43,8 +43,12 @@
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<<<<<<< HEAD
       <main.class>org.hyde.Hyde</main.class>
       <project.scm>Lothindir/projet-marzullo_matias_monti_golay_perrenoud</project.scm>
+=======
+      <project.scm>dil-classroom/projet-marzullo_matias_monti_golay_perrenoud</project.scm>
+>>>>>>> upstream/main
       <project.scm.url>https://github.com/${project.scm}</project.scm.url>
       <project.main.class>org.hyde.Hyde</project.main.class>
       <exec.mainClass>org.hyde.Hyde</exec.mainClass>

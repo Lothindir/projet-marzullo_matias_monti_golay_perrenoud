@@ -6,6 +6,7 @@ import picocli.CommandLine.Command;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 
@@ -55,6 +56,7 @@ class Build implements Callable<Integer> {
       var absPath = new File(basePath+File.separator+file);
 
       if (absPath.isFile()) {
+         metadataTemplating(file);
          buildMD(file);
          if (file.toString().endsWith(".md"))
             checkFileInclusion(file + ".html");
@@ -76,13 +78,14 @@ class Build implements Callable<Integer> {
       if (!file.endsWith(".html")) return;
 
       BufferedReader mdReader = new BufferedReader(new FileReader(basePath+File.separator+"build"+File.separator+file));
+     
       StringBuilder data = new StringBuilder();
 
       while(mdReader.ready()){
          data.append(mdReader.readLine()).append("\n");
       }
       mdReader.close();
-
+     
       Pattern filePattern = Pattern.compile("\\[\\[\\+ '.+\\.html' ]]");
 
       Matcher fileMatcher = filePattern.matcher(data.toString());
