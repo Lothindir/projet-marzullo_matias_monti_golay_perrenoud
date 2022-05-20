@@ -45,3 +45,7 @@ jobs:
             target/hyde-*.jar
             target/hyde
             target/hyde.exe
+<<<<<<< HEAD
+=======
+            target/hyde-javadoc.zip
+>>>>>>> upstream/main
