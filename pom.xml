@@ -5,11 +5,11 @@
    <name>hyde</name>
    <artifactId>hyde</artifactId>
    <groupId>org.hyde</groupId>
-   <version>0.0.1-SNAPSHOT</version>
+   <version>0.0.1</version>
 
    <description>Jekyll's evil twin static site generator</description>
 
-   <url>${project.scm.url}</url>
+   <url>${project.url}</url>
 
    <licenses>
       <license>
@@ -25,15 +25,15 @@
    </organization>
 
    <scm>
-      <url>scm:git:${project.scm.url}</url>
-      <connection>scm:git:git@github.com:${project.scm}.git</connection>
-      <developerConnection>scm:git:git@github.com:${project.scm}.git</developerConnection>
+      <url>git@github.com:${project.repo}</url>
+      <connection>scm:git:git@github.com:${project.scm.url}.git</connection>
+      <developerConnection>scm:git:git@github.com:${project.scm.url}.git</developerConnection>
      <tag>HEAD</tag>
   </scm>
 
    <issueManagement>
       <system>Issues</system>
-      <url>${project.scm.url}/issues</url>
+      <url>${project.url}/issues</url>
    </issueManagement>
 
    <ciManagement>
@@ -43,8 +43,8 @@
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.scm>Lothindir/projet-marzullo_matias_monti_golay_perrenoud</project.scm>
-      <project.scm.url>https://github.com/${project.scm}</project.scm.url>
+      <project.repo>Lothindir/projet-marzullo_matias_monti_golay_perrenoud</project.repo>
+      <project.url>https://github.com/${project.repo}</project.url>
       <project.main.class>org.hyde.Hyde</project.main.class>
       <exec.mainClass>org.hyde.Hyde</exec.mainClass>
       <java.version>11</java.version>
