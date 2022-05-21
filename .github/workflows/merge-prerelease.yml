@@ -14,7 +14,8 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
           
       - name: Set up JDK 11
         uses: actions/setup-java@v2
@@ -23,7 +24,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
           
-      - name: Build with Maven
+      - name: Maven Release
         uses: lothindir/github-actions-maven-release@master
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -35,16 +36,30 @@ jobs:
         env:
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64/
         
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Publish
+        uses: softprops/action-gh-release@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "nightly"
-          draft: false
           prerelease: true
-          title: "Nightly build"
+          generate_release_notes: true
+          name: "Nightly build"
+          tag: "nightly"
           files: |
             LICENSE
             target/hyde-*.jar
             target/hyde
             target/hyde.exe
             target/hyde-javadoc.zip
+
+        # uses: "marvinpinto/action-automatic-releases@latest"
+        # with:
+        #   repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        #   automatic_release_tag: "nightly"
+        #   draft: false
+        #   prerelease: true
+        #   title: "Nightly build"
+        #   files: |
+        #     LICENSE
+        #     target/hyde-*.jar
+        #     target/hyde
+        #     target/hyde.exe
+        #     target/hyde-javadoc.zip
