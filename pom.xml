@@ -28,7 +28,7 @@
       <url>git@github.com:${project.repo}</url>
       <connection>scm:git:${project.scm.url}.git</connection>
       <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>v0.0.1</tag>
   </scm>
 
    <issueManagement>
