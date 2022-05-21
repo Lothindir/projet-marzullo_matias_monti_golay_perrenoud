@@ -34,6 +34,7 @@ jobs:
         with:
           version: ${{ steps.getVersion.outputs.version }}
           package-manager-type: 'maven'
+          bump: 'patch'
           
       - name: Maven Release
         uses: lothindir/github-actions-maven-release@master
@@ -51,10 +52,10 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}
+          automatic_release_tag: v${{ steps.getBuildVersion.outputs.next-major }}.${{ steps.getBuildVersion.outputs.next-minor }}.${{ steps.getBuildVersion.outputs.next-patch }}
           draft: false
           prerelease: true
-          title: "Nightly release - v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}"
+          title: "Nightly release - v${{ steps.getBuildVersion.outputs.next-major }}.${{ steps.getBuildVersion.outputs.next-minor }}.${{ steps.getBuildVersion.outputs.next-patch }}"
           files: |
             LICENSE
             target/hyde-*.jar
