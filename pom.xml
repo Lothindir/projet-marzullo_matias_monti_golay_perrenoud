@@ -235,8 +235,10 @@
             <version>3.0.0-M5</version>
             <configuration>
                <tagNameFormat>v@{project.version}</tagNameFormat>
-               <scmCommentPrefix>[CI skip]</scmCommentPrefix>
+               <scmCommentPrefix>[CI SKIP]</scmCommentPrefix>
                <preparationGoals>clean verify</preparationGoals>
+               <remoteTagging>false</remoteTagging>
+               <suppressCommitBeforeTag>true</suppressCommitBeforeTag>
             </configuration>
          </plugin>
       </plugins>
