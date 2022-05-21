@@ -5,7 +5,7 @@
    <name>hyde</name>
    <artifactId>hyde</artifactId>
    <groupId>org.hyde</groupId>
-   <version>0.1.2-SNAPSHOT</version>
+   <version>0.1.2</version>
 
    <description>Jekyll's evil twin static site generator</description>
 
@@ -28,7 +28,7 @@
       <url>git@github.com:${project.repo}</url>
       <connection>scm:git:${project.scm.url}.git</connection>
       <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
-      <tag>v0.0.1</tag>
+      <tag>v0.1.2</tag>
   </scm>
 
    <issueManagement>
