@@ -150,7 +150,7 @@ class Build implements Callable<Integer> {
   /*
     * Charges the metadatas requested in the file
     * @param file path to the md file
-    * @throws IOException If the reader couldn't read the config file
+    * @throws IOException If the reader couldn't read the config file.
     */
    private void metadataTemplating(File file) throws IOException {
       if (!file.toString().endsWith("md")) return;
