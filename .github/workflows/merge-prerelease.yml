@@ -47,3 +47,4 @@ jobs:
             target/hyde-*.jar
             target/hyde
             target/hyde.exe
+            target/hyde-javadoc.zip
