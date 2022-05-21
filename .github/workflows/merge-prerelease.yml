@@ -47,6 +47,21 @@ jobs:
         env:
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64/
         
+      - name: Publish version
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}
+          draft: false
+          prerelease: true
+          title: "Nightly release - v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}"
+          files: |
+            LICENSE
+            target/hyde-*.jar
+            target/hyde
+            target/hyde.exe
+            target/hyde-javadoc.zip
+            
       - name: Publish nightly
         uses: "marvinpinto/action-automatic-releases@latest"
         id: nightlyBuild
@@ -63,17 +78,3 @@ jobs:
             target/hyde.exe
             target/hyde-javadoc.zip
 
-      - name: Publish version
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}
-          draft: false
-          prerelease: true
-          title: "Nightly release - v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}"
-          files: |
-            LICENSE
-            target/hyde-*.jar
-            target/hyde
-            target/hyde.exe
-            target/hyde-javadoc.zip
