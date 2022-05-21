@@ -20,6 +20,17 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
           cache: maven
+
+      - name: Get Project Version from pom.xml
+        uses: entimaniac/read-pom-version-action@1.0.0
+        id: getVersion
+
+      - name: Get Build Version
+        uses: terradatum/semver-action@main
+        id: getBuildVersion
+        with:
+          version: ${{ steps.getVersion.outputs.version }}
+          package-manager-type: 'maven'
           
       - name: Build with Maven
         uses: lothindir/github-actions-maven-release@master
@@ -29,17 +40,34 @@ jobs:
           git-release-bot-email: "release.bot.github@gmail.com"
           release-branch-name: "main"
           version-minor: true
+          skip-bot-release-check: true
           maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
         env:
           JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64/
-        
-      - uses: "marvinpinto/action-automatic-releases@latest"
+
+      - name: "Publish latest"
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           draft: true
           prerelease: false
           title: "Sprint release"
+          files: |
+            LICENSE
+            target/hyde-*.jar
+            target/hyde
+            target/hyde.exe
+            target/hyde-javadoc.zip
+
+      - name: "Publish version"
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}
+          draft: false
+          prerelease: true
+          title: "Nightly release - v${{ steps.getBuildVersion.outputs.major }}.${{ steps.getBuildVersion.outputs.minor }}.${{ steps.getBuildVersion.outputs.patch }}"
           files: |
             LICENSE
             target/hyde-*.jar
