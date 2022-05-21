@@ -67,10 +67,10 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ steps.nightlyBuild.outputs.automatic_releases_tag }}
+          automatic_release_tag: v${{ steps.getBuildVersion.outputs.next_major }}.${{ steps.getBuildVersion.outputs.next_minor }}.${{ steps.getBuildVersion.outputs.next_patch }}
           draft: false
           prerelease: true
-          title: "Nightly release - ${{ steps.nightlyBuild.outputs.automatic_releases_tag }}"
+          title: "Nightly release - v${{ steps.getBuildVersion.outputs.next_major }}.${{ steps.getBuildVersion.outputs.next_minor }}.${{ steps.getBuildVersion.outputs.next_patch }}"
           files: |
             LICENSE
             target/hyde-*.jar
