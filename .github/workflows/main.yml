@@ -1,0 +1,19 @@
+name: Main
+on: [push, workflow_dispatch]
+
+jobs:
+  main:
+    name: Main job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: "projet-marzullo_matias_monti_golay_perrenoud"
+
+      # - name: Test
+      #   run: ls ./.github/actions
+      #   shell: bash
+
+      - name: Local Action
+        uses: ./.github/actions/automatic-release@main

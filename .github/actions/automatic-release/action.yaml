@@ -1,0 +1,12 @@
+name: Automatic build and release on Github with Maven
+description: Build, tag, release and upload to Github using Maven
+author: Lothindir
+inputs:
+
+outputs:
+
+runs:
+  using: composite
+  steps:
+    run: echo "Hello World"
+    shell: bash
