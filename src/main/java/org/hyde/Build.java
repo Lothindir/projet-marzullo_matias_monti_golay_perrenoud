@@ -72,7 +72,6 @@ class Build implements Callable<Integer> {
       }
    }
 
-
    /**
     * Check for file inclusions and charges them
     * @param file path to the HTML file
@@ -149,71 +148,76 @@ class Build implements Callable<Integer> {
   
   /*
     * Charges the metadatas requested in the file
+    * 
     * @param file path to the md file
     * @throws IOException If the reader couldn't read the config file
     */
    private void metadataTemplating(File file) throws IOException {
-      if (!file.toString().endsWith("md")) return;
+      if (!file.toString().endsWith("md"))
+         return;
 
-      BufferedReader configReader = new BufferedReader(new FileReader(basePath+File.separator+"config.yaml"));
-      BufferedReader mdReader = new BufferedReader(new FileReader(basePath+File.separator+file));
-      List<String> configFile = new ArrayList<>();
-  
-      StringBuilder data = new StringBuilder();
+      try (
+            BufferedReader configReader = new BufferedReader(new FileReader(basePath + File.separator + "config.yaml"));
+            BufferedReader mdReader = new BufferedReader(new FileReader(basePath + File.separator + file));
+            BufferedWriter mdWriter = new BufferedWriter(new FileWriter(basePath + File.separator + file))) {
 
-      while(mdReader.ready()){
-         data.append(mdReader.readLine()).append("\n");
-      }
-      mdReader.close();
-      while(configReader.ready()){
-         configFile.add(configReader.readLine());
-      }
+         List<String> configFile = new ArrayList<>();
+         StringBuilder data = new StringBuilder();
 
-      Pattern configPattern = Pattern.compile("\\[\\[ config.\\S+ ]]");
-      Pattern pagePattern = Pattern.compile("\\[\\[ page.\\S+ ]]");
-
-      Matcher configMatcher = configPattern.matcher(data.toString());
-
-
-      while (configMatcher.find()) {
-         String configName = configMatcher.group().substring(10, configMatcher.group().length() - 3);
-         String configValue = "";
-
-         for(String line : configFile){
-            if(line.contains(configName)){
-               configValue = line.substring(configName.length()+1);
-               break;
-            }
+         while (mdReader.ready()) {
+            data.append(mdReader.readLine()).append("\n");
          }
 
-         if(!configValue.isEmpty())
-            data = new StringBuilder(data.toString().replaceFirst("\\[\\[ config.\\S+ ]]", configValue));
-      }
+         while (configReader.ready()) {
+            configFile.add(configReader.readLine());
+         }
 
-      if(data.toString().startsWith("---")){
-         String pageMetadatas = data.substring(0, data.indexOf("..."));
-         data = new StringBuilder(data.substring(data.indexOf("...") + 4));;
+         Pattern configPattern = Pattern.compile("\\[\\[ config.\\S+ ]]");
+         Pattern pagePattern = Pattern.compile("\\[\\[ page.\\S+ ]]");
 
-         Matcher pageMatcher = pagePattern.matcher(data.toString());
+         Matcher configMatcher = configPattern.matcher(data.toString());
 
-         while (pageMatcher.find()) {
-            String configName = pageMatcher.group().substring(8, pageMatcher.group().length() - 3);
+         while (configMatcher.find()) {
+            String configName = configMatcher.group().substring(10, configMatcher.group().length() - 3);
             String configValue = "";
 
-            if(pageMetadatas.contains(configName)){
-               configValue = pageMetadatas.substring(pageMetadatas.indexOf(configName) + configName.length()+1, pageMetadatas.indexOf('\n', pageMetadatas.indexOf(configName)));
+            for (String line : configFile) {
+               if (line.contains(configName)) {
+                  configValue = line.substring(configName.length() + 1);
+                  break;
+               }
             }
 
-            if(!configValue.isEmpty())
-               data = new StringBuilder(data.toString().replaceFirst("\\[\\[ page.\\S+ ]]", configValue));
+            if (!configValue.isEmpty())
+               data = new StringBuilder(data.toString().replaceFirst("\\[\\[ config.\\S+ ]]", configValue));
          }
+
+         if (data.toString().startsWith("---")) {
+            String pageMetadatas = data.substring(0, data.indexOf("..."));
+            data = new StringBuilder(data.substring(data.indexOf("...") + 4));
+            ;
+
+            Matcher pageMatcher = pagePattern.matcher(data.toString());
+
+            while (pageMatcher.find()) {
+               String configName = pageMatcher.group().substring(8, pageMatcher.group().length() - 3);
+               String configValue = "";
+
+               if (pageMetadatas.contains(configName)) {
+                  configValue = pageMetadatas.substring(pageMetadatas.indexOf(configName) + configName.length() + 1,
+                        pageMetadatas.indexOf('\n', pageMetadatas.indexOf(configName)));
+               }
+
+               if (!configValue.isEmpty())
+                  data = new StringBuilder(data.toString().replaceFirst("\\[\\[ page.\\S+ ]]", configValue));
+            }
+         }
+
+         mdWriter.write(String.valueOf(data));
+      } catch (Exception e) {
+         System.err.println("An error occured while converting to HTML");
+         System.err.println(e.getMessage());
       }
-
-      BufferedWriter mdWriter = new BufferedWriter(new FileWriter(basePath+File.separator+file));
-
-      mdWriter.write(String.valueOf(data));
-      mdWriter.close();
-
    }
 
    /**

@@ -35,7 +35,7 @@ jobs:
           version: ${{ steps.getVersion.outputs.version }}
           package-manager-type: 'maven'
           bump: 'patch'
-      
+
       - name: Get previous build version
         run: echo "::set-output name=previous-patch::((${{ steps.getBuildVersion.outputs.patch }}+1))"
           
@@ -81,4 +81,3 @@ jobs:
             target/hyde
             target/hyde.exe
             target/hyde-javadoc.zip
-
