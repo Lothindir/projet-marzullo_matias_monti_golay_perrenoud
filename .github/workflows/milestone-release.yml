@@ -10,15 +10,21 @@ jobs:
     name: "Release on Milestone closed"
     runs-on: "ubuntu-latest"
 <<<<<<< HEAD
+<<<<<<< HEAD
     if: "!contains(github.event.head_commit.message, '[CI skip]')"
 
     steps:
       - uses: actions/checkout@v2
 =======
+=======
+>>>>>>> upstream/main
     if: "!contains(github.event.head_commit.message, '[CI SKIP]')"
 
     steps:
       - uses: actions/checkout@v3
+<<<<<<< HEAD
+>>>>>>> upstream/main
+=======
 >>>>>>> upstream/main
           
       - name: Set up JDK 11
@@ -50,7 +56,11 @@ jobs:
           version-minor: true
           skip-bot-release-check: true
 <<<<<<< HEAD
+<<<<<<< HEAD
           maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
+=======
+          maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true -Dtag=zbuild"
+>>>>>>> upstream/main
 =======
           maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true -Dtag=zbuild"
 >>>>>>> upstream/main

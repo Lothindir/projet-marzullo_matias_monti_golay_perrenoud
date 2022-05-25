@@ -16,7 +16,11 @@ jobs:
     steps:
       - name: Checkout
 <<<<<<< HEAD
+<<<<<<< HEAD
         uses: actions/checkout@v2
+=======
+        uses: actions/checkout@v3
+>>>>>>> upstream/main
 =======
         uses: actions/checkout@v3
 >>>>>>> upstream/main
@@ -40,6 +44,12 @@ jobs:
           package-manager-type: 'maven'
           bump: 'patch'
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      
+      - name: Get previous build version
+        run: echo "::set-output name=previous-patch::((${{ steps.getBuildVersion.outputs.patch }}+1))"
+>>>>>>> upstream/main
 =======
       
       - name: Get previous build version
@@ -55,7 +65,11 @@ jobs:
           release-branch-name: "main"
           version-patch: true
 <<<<<<< HEAD
+<<<<<<< HEAD
           maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true"
+=======
+          maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true -Dtag=zbuild"
+>>>>>>> upstream/main
 =======
           maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true -Dtag=zbuild"
 >>>>>>> upstream/main
@@ -93,6 +107,9 @@ jobs:
             target/hyde.exe
             target/hyde-javadoc.zip
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/main
 =======
 >>>>>>> upstream/main
