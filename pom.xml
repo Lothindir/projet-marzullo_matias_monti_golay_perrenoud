@@ -43,7 +43,7 @@
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.repo>dil-classroom/projet-marzullo_matias_monti_golay_perrenoud</project.repo>
+      <project.repo>Lothindir/projet-marzullo_matias_monti_golay_perrenoud</project.repo>
       <project.url>https://github.com/${project.repo}</project.url>
       <project.main.class>org.hyde.Hyde</project.main.class>
       <exec.mainClass>org.hyde.Hyde</exec.mainClass>
