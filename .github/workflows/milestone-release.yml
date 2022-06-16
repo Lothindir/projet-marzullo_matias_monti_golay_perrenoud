@@ -40,7 +40,7 @@ jobs:
           git-release-bot-name: "release-bot-github "
           git-release-bot-email: "release.bot.github@gmail.com"
           release-branch-name: "main"
-          version-minor: true
+          version-increment: "minor"
           skip-bot-release-check: true
           maven-args: "-Ddockerfile.skip -DdockerCompose.skip -Dmaven.deploy.skip=true -Dtag=zbuild -DskipTests=true"
         env:
