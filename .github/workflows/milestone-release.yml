@@ -65,10 +65,10 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: v${{ steps.getBuildVersion.outputs.next-version }}
+          automatic_release_tag: v${{ steps.getBuildVersion.outputs.version.major }}.${{ steps.getBuildVersion.outputs.version.minor }}.${{ steps.getBuildVersion.outputs.version.patch }}
           draft: true
           prerelease: false
-          title: "Sprint release - v${{ steps.getBuildVersion.outputs.next-version }}"
+          title: "Sprint release - v${{ steps.getBuildVersion.outputs.version.major }}.${{ steps.getBuildVersion.outputs.version.minor }}.${{ steps.getBuildVersion.outputs.version.patch }}"
           files: |
             LICENSE
             target/hyde-*.jar
